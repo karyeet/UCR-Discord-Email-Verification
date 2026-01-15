@@ -4,7 +4,8 @@ import re
 from random import randrange
 import asyncio
 import pymongo
-from mailjet_email import send_mailjet_email
+#from mailjet_email import send_mailjet_email
+from smtp_email import send_smtp_email
 from dotenv import load_dotenv, find_dotenv
 from os import environ
 
@@ -195,7 +196,7 @@ async def verify(ctx,
             await ctx.respond(f'Check email {res["email"]} for code. After 5 minutes your code will expire and you can request a new one. **If you do not see a verification email, check your spam.** After 5 minutes, you can request a new verification code.', ephemeral=True)
         return
 
-    success = await send_mailjet_email(email, ctx.author.name, str(code))
+    success = await send_smtp_email(email, ctx.author.name, str(code))
 
     if success:
         await ctx.respond("Verification Email Sent.", ephemeral=True)
