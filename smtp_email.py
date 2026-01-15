@@ -3,7 +3,7 @@ from os import environ
 
 url = "https://smtpapi.mxroute.com/"
 
-def send_smtp_email(to_email, name, code):
+async def send_smtp_email(to_email, name, code):
 
     smtp_pass = environ.get("SMTP_PASSWORD")
 
@@ -23,3 +23,4 @@ def send_smtp_email(to_email, name, code):
     response = requests.post(url, json=payload)
     response.raise_for_status()  # raises if non-2xx
     print(response.text)
+    return response.status_code == 200
