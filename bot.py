@@ -27,6 +27,7 @@ server_records = db.serverdata
 intents = discord.Intents.default()
 intents.guilds = True
 intents.members = True
+print("starting")
 bot = discord.Bot(intents=intents)
 
 #bot = discord.Bot()
