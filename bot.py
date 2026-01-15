@@ -201,13 +201,13 @@ async def verify(ctx,
             #in verification process
             await ctx.respond(f'Check email {res["email"]} for code. After 5 minutes your code will expire and you can request a new one. **If you do not see a verification email, check your spam.** After 5 minutes, you can request a new verification code.', ephemeral=True)
         return
-
+    await ctx.defer(ephemeral=True)
     success = await send_smtp_email(email, ctx.author.name, str(code))
 
     if success:
-        await ctx.respond("Verification Email Sent.", ephemeral=True)
+        await ctx.followup.send("Verification Email Sent.", ephemeral=True)
     else:
-        await ctx.respond("Email failed to send, lol oops. Please contact bot administrator(nate).", ephemeral=True)
+        await ctx.followup.send("Email failed to send, lol oops. Please contact bot administrator(nate).", ephemeral=True)
         return
     
     await removeRecord(ctx.author.id)
