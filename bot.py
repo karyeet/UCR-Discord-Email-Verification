@@ -24,7 +24,12 @@ server_records = db.serverdata
 
 #bot = commands.Bot(command_prefix='!', description=description, intents=intents)
 #bot.verification_codes = {}
-bot = discord.Bot()
+intents = discord.Intents.default()
+intents.guilds = True
+intents.members = True
+bot = discord.Bot(intents=intents)
+
+#bot = discord.Bot()
 
 @bot.event
 async def on_ready():
@@ -102,15 +107,15 @@ async def addServerToDB(guildid: int, roleid: int):
         server_records.insert_one(server)
     return
 
-@bot.slash_command(
-    name="add",
-    description="Test command to ensure the bot is working. Adds two integers.",
-    guild_ids=[929180791760642059]
-)
-async def add(ctx, left: int, right: int):
-    """Adds two numbers together."""
-    await ctx.respond(left + right, ephemeral=True)
-    return
+#@bot.slash_command(
+#    name="add",
+#    description="Test command to ensure the bot is working. Adds two integers.",
+#    guild_ids=[929180791760642059]
+#)
+#async def add(ctx, left: int, right: int):
+#    """Adds two numbers together."""
+#    await ctx.respond(left + right, ephemeral=True)
+#    return
 
 
 @bot.slash_command(
